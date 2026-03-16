@@ -1,5 +1,5 @@
 const sheetURL =
-"https://docs.google.com/spreadsheets/d/e/2PACX-1vT9-C6I8cgaQuPAVggcc8osrWEjO7f8vJWC4hVQ83W78NkxrB_8QoBYDEGzWv0ljpMfKRJJTyM31mRF/pub?gid=0&single=true&output=csv";
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vT9-C6I8cgaQuPAVggcc8osrWEjO7f8vJWC4hVQ83W78NkxrB_8QoBYDEGzWv0ljpMfKRJJTyM31mRF/pubhtml?gid=0&single=true";
 
 fetch(sheetURL)
 .then(res => res.text())
@@ -7,43 +7,45 @@ fetch(sheetURL)
 
 const rows = data.split("\n").slice(1);
 
-let html = "";
+let html="";
 
-rows.forEach(row => {
+rows.forEach((row,i)=>{
 
-const cols = row.split(",");
+const cols=row.split(",");
 
-const avenger = cols[0];
-const from = cols[1];
-const to = cols[2];
-let status = cols[3];
+const avenger=cols[0];
+const from=cols[1];
+const to=cols[2];
+let status=cols[3];
 
-if(!status || status.trim() === ""){
-status = "Pending";
+if(!status || status.trim()===""){
+status="Pending";
 }
 
-const className =
-status.toLowerCase() === "done"
+const className=status.toLowerCase()=="done"
 ? "done"
 : "pending";
 
-html += `
-<div class="card ${className}">
+html+=`
+
+<div class="card ${className}" style="animation-delay:${i*0.2}s">
 
 <div class="name">🦸 ${avenger}</div>
 
 <div class="date">From: ${from}</div>
+
 <div class="date">To: ${to}</div>
 
 <div class="status">
-${status === "Done" ? "✅ Paid" : "⏳ Pending"}
+${status=="Done" ? "✅ Paid" : "⏳ Pending"}
 </div>
 
 </div>
+
 `;
 
 });
 
-document.getElementById("cards").innerHTML = html;
+document.getElementById("cards").innerHTML=html;
 
 });
