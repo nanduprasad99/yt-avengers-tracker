@@ -1,39 +1,47 @@
 body{
 font-family:Arial;
-background:#020617;
+background: radial-gradient(circle at top,#020617,#000);
 color:white;
 text-align:center;
 }
 
-h1{
+.title{
+font-size:42px;
+letter-spacing:2px;
 margin-top:40px;
-font-size:38px;
+animation: glow 2s infinite alternate;
 }
 
 .subtitle{
 color:#94a3b8;
+margin-bottom:40px;
 }
 
 #cards{
 display:flex;
 flex-wrap:wrap;
 justify-content:center;
-gap:25px;
-margin-top:40px;
+gap:30px;
 }
 
 .card{
 
 width:260px;
-padding:20px;
+padding:25px;
 border-radius:15px;
+
 background:#0f172a;
-box-shadow:0 10px 25px rgba(0,0,0,0.6);
-transition:0.3s;
+
+box-shadow:0 0 20px rgba(0,0,0,0.8);
+
+transition:0.4s;
+
+animation: fadeIn 1s ease forwards;
 }
 
 .card:hover{
-transform:scale(1.05);
+transform:scale(1.08) rotate(1deg);
+box-shadow:0 0 30px #38bdf8;
 }
 
 .done{
@@ -52,6 +60,42 @@ margin-bottom:10px;
 
 .date{
 color:#94a3b8;
+}
+
+.status{
+margin-top:12px;
+font-size:18px;
+font-weight:bold;
+}
+
+/* glowing title */
+
+@keyframes glow{
+
+from{
+text-shadow:0 0 10px #38bdf8;
+}
+
+to{
+text-shadow:0 0 25px #38bdf8;
+}
+
+}
+
+/* entrance animation */
+
+@keyframes fadeIn{
+
+from{
+opacity:0;
+transform:translateY(20px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
 }
 
 .status{
