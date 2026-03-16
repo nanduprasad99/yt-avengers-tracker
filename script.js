@@ -5,7 +5,8 @@ fetch(sheetURL + "&t=" + new Date().getTime())
 .then(res => res.text())
 .then(data => {
 
-const rows = data.split("\n").slice(1);
+const rows = data.trim().split("\n");
+rows.shift();
 
 let html = "";
 
@@ -16,29 +17,20 @@ const cols = row.split(",");
 const avenger = cols[0];
 const from = cols[1];
 const to = cols[2];
-
 let status = (cols[3] || "").trim();
 
 if(status !== "Done"){
 status = "Pending";
 }
 
-const className = status === "Done"
-? "done"
-: "pending";
+const className = status === "Done" ? "done" : "pending";
 
 html += `
-<div class="card ${className}" style="animation-delay:${i*0.2}s">
-
+<div class="card ${className}">
 <div class="name">🦸 ${avenger}</div>
-
 <div class="date">From: ${from}</div>
 <div class="date">To: ${to}</div>
-
-<div class="status">
-${status === "Done" ? "✅ Paid" : "⏳ Pending"}
-</div>
-
+<div class="status">${status === "Done" ? "✅ Paid" : "⏳ Pending"}</div>
 </div>
 `;
 
